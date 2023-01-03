@@ -19,5 +19,4 @@ lsp.set_preferences({
     info = ''
   }
 })
-
 lsp.setup()

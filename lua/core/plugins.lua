@@ -30,14 +30,11 @@ return require('packer').startup(function(use)
     requires = {
       'nvim-tree/nvim-web-devicons', -- optional, for file icons
     },
-    tag = 'nightly' 
-  } 
+    tag = 'nightly'
+  }
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = function()
-      local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-      ts_update()
-    end,
+    run = ':TSUpdate'
   }
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.0',

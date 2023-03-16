@@ -1,6 +1,5 @@
 -- Default configurations for nvim.
 
-
 -- Colors and feel.
 vim.opt.backspace = '2'
 vim.opt.showcmd = true
@@ -16,4 +15,5 @@ vim.opt.expandtab = true
 vim.opt.clipboard = "unnamedplus"
 
 vim.cmd('colorscheme rose-pine')
+vim.o.background = "dark"
 vim.cmd('set relativenumber')

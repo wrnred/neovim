@@ -13,7 +13,8 @@ local vimspector_python = [[
         "stopOnEntry": true,
         "console": "externalTerminal",
         "debugOptions": [],
-        "program": "${file}"
+        "program": "${file}",
+        "args":[]
       }
     }
   }

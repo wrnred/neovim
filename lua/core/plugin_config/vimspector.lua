@@ -1,4 +1,4 @@
-local vimspector_cfg = {}
+Vimspector_cfg = {}
 
 local vimspector_python = [[
 {
@@ -27,7 +27,7 @@ local function debuggers()
 end
 
 --- Generate debug profile. Currently for Python only
-function vimspector_cfg.generate_debug_profile()
+function Vimspector_cfg.generate_debug_profile()
   -- Get current file type
   local buf = vim.api.nvim_get_current_buf()
   local ft = vim.api.nvim_buf_get_option(buf, "filetype")
@@ -56,24 +56,24 @@ end
 
 local function set_keybindings()
   -- Generating the config file for the debugger.
-  vim.keymap.set('n', '<leader>dG', "<CMD>lua require('core.plugin_config.vimspector').generate_debug_profile()<CR>")
+  vim.keymap.set('n', '<leader>dG', "<CMD>lua require('core.plugin_config.vimspector');Vimspector_cfg.generate_debug_profile()<CR>")
   vim.keymap.set('n', '<leader>dR', "<CMD>call vimspector#Restart()<CR>")
   vim.keymap.set('n', '<leader>dS', "<CMD>call vimspector#Stop()<CR>")
   vim.keymap.set('n', '<leader>ds', "<CMD>call vimspector#Launch()<CR>")
   vim.keymap.set('n', '<leader>dr', "<CMD>call vimspector#RunToCursor()<CR>")
   vim.keymap.set('n', '<leader>dc', "<CMD>call vimspector#Continue()<CR>")
-  vim.keymap.set('n', '<leader>di', "<CMD>call vimspector#Into()<CR>")
+  vim.keymap.set('n', '<leader>di', "<CMD>call vimspector#StepInto()<CR>")
   vim.keymap.set('n', '<leader>do', "<CMD>call vimspector#StepOver()<CR>")
   vim.keymap.set('n', '<leader>dt', "<CMD>call vimspector#ToggleBreakpoint()<CR>")
   vim.keymap.set('n', '<leader>du', "<CMD>call vimspector#StepOut()<CR>")
   vim.keymap.set('n', '<leader>dx', "<CMD>VimspectorReset<CR>")
 end
 
-function vimspector_cfg.setup()
+function Vimspector_cfg.setup()
   vim.cmd("packadd vimspector") -- Load vimspector
   debuggers() -- Configure debuggers
   set_keybindings() -- Set relative keybindings.
 end
 
 
-vimspector_cfg.setup()
+Vimspector_cfg.setup()

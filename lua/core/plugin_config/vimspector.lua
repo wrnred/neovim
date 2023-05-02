@@ -24,6 +24,7 @@ local vimspector_python = [[
 local function debuggers()
   vim.g.vimspector_install_gadgets = {
     "debugpy", -- Python
+    "codelldb",
   }
 end
 

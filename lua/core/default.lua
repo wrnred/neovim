@@ -17,3 +17,6 @@ vim.opt.clipboard = "unnamedplus"
 vim.cmd('colorscheme rose-pine')
 vim.o.background = "dark"
 vim.cmd('set relativenumber')
+
+-- Provider Configuration.
+vim.g.python3_host_prog = '~/.config/nvim/venv/bin/python3'

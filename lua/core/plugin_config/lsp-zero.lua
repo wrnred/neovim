@@ -19,4 +19,6 @@ lsp.set_preferences({
     info = ''
   }
 })
+
+lsp.setup_servers({'dartls', force=true})
 lsp.setup()

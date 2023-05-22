@@ -1,5 +1,42 @@
 Vimspector_cfg = {}
 
+local vimspector_c = [[
+{
+  "configurations": {
+    "<name>: Launch": {
+      "adapter": "vscode-cpptools",
+      "configuration": {
+        "name": "Debug",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceRoot}/bin/star",
+        "cwd": "${workspaceRoot}",
+        "externalConsole": true,
+        "stopAtEntry": true,
+        "MIMode": "gdb",
+        "setupCommands": [
+          {
+            "description": "Enable pretty-printing for gdb",
+            "text": "-enable-pretty-printing",
+            "ignoreFailures": true
+          }
+        ]
+      }
+    },
+    "<name>: Attach": {
+      "adapter": "vscode-cpptools",
+      "configuration": {
+        "name": "Debug: Attach",
+        "type": "cppdbg",
+        "request": "attach",
+        "program": "${workspaceRoot}/bin/star",
+        "MIMode": "gdb"
+      }
+    }
+  }
+}
+]]
+
 local vimspector_python = [[
 {
   "configurations": {
@@ -19,12 +56,16 @@ local vimspector_python = [[
     }
   }
 }
+
 ]]
 
 local function debuggers()
   vim.g.vimspector_install_gadgets = {
     "debugpy", -- Python
+    "local-lua-debugger-vscode",
+    "delve",
     "codelldb",
+    "vscode-cpptools",
   }
 end
 
@@ -38,6 +79,22 @@ function Vimspector_cfg.generate_debug_profile()
     -- Get Python path
     local python3 = vim.fn.exepath "python"
     local debugProfile = string.format(vimspector_python, python3)
+
+    -- Generate debug profile in a new window
+    vim.api.nvim_exec("vsp", true)
+    local win = vim.api.nvim_get_current_win()
+    local bufNew = vim.api.nvim_create_buf(true, false)
+    vim.api.nvim_buf_set_name(bufNew, ".vimspector.json")
+    vim.api.nvim_win_set_buf(win, bufNew)
+
+    local lines = {}
+    for s in debugProfile:gmatch "[^\r\n]+" do
+      table.insert(lines, s)
+    end
+    vim.api.nvim_buf_set_lines(bufNew, 0, -1, false, lines)
+
+  elseif ft == "c" then
+    local debugProfile = string.format(vimspector_c)
 
     -- Generate debug profile in a new window
     vim.api.nvim_exec("vsp", true)

@@ -204,19 +204,19 @@ time([[Config for rose-pine]], false)
 
 -- Command lazy-loads
 time([[Defining lazy-load commands]], true)
-pcall(vim.api.nvim_create_user_command, 'VimspectorUpdate', function(cmdargs)
-          require('packer.load')({'vimspector'}, { cmd = 'VimspectorUpdate', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
-        end,
-        {nargs = '*', range = true, bang = true, complete = function()
-          require('packer.load')({'vimspector'}, {}, _G.packer_plugins)
-          return vim.fn.getcompletion('VimspectorUpdate ', 'cmdline')
-      end})
 pcall(vim.api.nvim_create_user_command, 'VimspectorInstall', function(cmdargs)
           require('packer.load')({'vimspector'}, { cmd = 'VimspectorInstall', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
         end,
         {nargs = '*', range = true, bang = true, complete = function()
           require('packer.load')({'vimspector'}, {}, _G.packer_plugins)
           return vim.fn.getcompletion('VimspectorInstall ', 'cmdline')
+      end})
+pcall(vim.api.nvim_create_user_command, 'VimspectorUpdate', function(cmdargs)
+          require('packer.load')({'vimspector'}, { cmd = 'VimspectorUpdate', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
+        end,
+        {nargs = '*', range = true, bang = true, complete = function()
+          require('packer.load')({'vimspector'}, {}, _G.packer_plugins)
+          return vim.fn.getcompletion('VimspectorUpdate ', 'cmdline')
       end})
 time([[Defining lazy-load commands]], false)
 

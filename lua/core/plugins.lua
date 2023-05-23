@@ -79,7 +79,7 @@ return require('packer').startup(function(use)
     cmd = { "VimspectorInstall", "VimspectorUpdate" },
     fn = { "vimspector#Launch()", "vimspector#ToggleBreakpoint", "vimspector#Continue" },
     config = function()
-      require("config.vimspector").setup()
+      require("plugin_config.vimspector").setup()
     end,
   }
   -- Automatically set up your configuration after cloning packer.nvim

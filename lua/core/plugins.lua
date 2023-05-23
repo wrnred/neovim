@@ -48,6 +48,10 @@ return require('packer').startup(function(use)
     }
   }
   use {
+  'kkoomen/vim-doge',
+  run = ':call doge#install()'
+  }
+  use {
     'VonHeikemen/lsp-zero.nvim',
     requires = {
       -- LSP Support

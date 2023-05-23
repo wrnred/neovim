@@ -7,7 +7,6 @@ vim.opt.laststatus = 2
 vim.opt.autowrite = true
 vim.opt.cursorline = false
 vim.opt.autoread = true
-vim.opt.clipboard = "unnamedplus"
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.shiftround = true

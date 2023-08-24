@@ -1,4 +1,6 @@
-Vimspector_cfg = {}
+local Vimspector_cfg = {}
+
+Vimspector_Svc = {}
 
 local vimspector_c = [[
 {
@@ -81,15 +83,15 @@ local vimspector_go = [[
 local function debuggers()
   vim.g.vimspector_install_gadgets = {
     "debugpy", -- Python
-    "local-lua-debugger-vscode",
-    "delve",
-    "codelldb",
-    "vscode-cpptools",
+    "local-lua-debugger-vscode", -- lua
+    "vscode-go", -- go
+    "codelldb", -- c
+    "vscode-cpptools", -- c
   }
 end
 
 --- Generate debug profile. Currently for Python only
-function Vimspector_cfg.generate_debug_profile()
+function Vimspector_Svc.generate_debug_profile()
   -- Get current file type
   local buf = vim.api.nvim_get_current_buf()
   local ft = vim.api.nvim_buf_get_option(buf, "filetype")
@@ -151,7 +153,7 @@ end
 
 local function set_keybindings()
   -- Generating the config file for the debugger.
-  vim.keymap.set('n', '<leader>dG', "<CMD>lua require('core.plugin_config.vimspector');Vimspector_cfg.generate_debug_profile()<CR>")
+  vim.keymap.set('n', '<leader>dG', "<CMD>lua require('core.plugin_config.vimspector');Vimspector_Svc.generate_debug_profile()<CR>")
   vim.keymap.set('n', '<leader>dR', "<CMD>call vimspector#Restart()<CR>")
   vim.keymap.set('n', '<leader>dS', "<CMD>call vimspector#Stop()<CR>")
   vim.keymap.set('n', '<leader>ds', "<CMD>call vimspector#Launch()<CR>")
@@ -165,10 +167,9 @@ local function set_keybindings()
 end
 
 function Vimspector_cfg.setup()
-  vim.cmd("packadd vimspector") -- Load vimspector
-  debuggers() -- Configure debuggers
   set_keybindings() -- Set relative keybindings.
+  vim.cmd [[packadd! vimspector]] -- Load vimspector
+  debuggers() -- Configure debuggers
 end
 
-
-Vimspector_cfg.setup()
+return Vimspector_cfg

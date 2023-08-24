@@ -1,5 +1,4 @@
 -- Configuration for Packet et auto-install.
-
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -24,7 +23,9 @@ return require('packer').startup(function(use)
       vim.cmd('colorscheme rose-pine')
     end
   })
+
   use('nvim-lualine/lualine.nvim')
+
   use {
     'nvim-tree/nvim-tree.lua',
     requires = {
@@ -32,24 +33,23 @@ return require('packer').startup(function(use)
     },
     tag = 'nightly'
   }
+
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
+
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.0',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
+
   use {
     "tpope/vim-fugitive",
     requires = {
       -- For GBrowse
       {'tpope/vim-rhubarb'},
     }
-  }
-  use {
-  'kkoomen/vim-doge',
-  run = ':call doge#install()'
   }
 
   use {
@@ -80,7 +80,7 @@ return require('packer').startup(function(use)
     cmd = { "VimspectorInstall", "VimspectorUpdate" },
     fn = { "vimspector#Launch()", "vimspector#ToggleBreakpoint", "vimspector#Continue" },
     config = function()
-      require("plugin_config.vimspector").setup()
+      require("core.plugin_config.vimspector").setup()
     end,
   }
   -- Automatically set up your configuration after cloning packer.nvim

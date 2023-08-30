@@ -68,6 +68,7 @@ local vimspector_go = [[
       "adapter": "delve",
       "filetypes": [ "go" ],
       "variables": {
+        "dlvFlags": "--check-go-version=false"
       },
       "configuration": {
         "request": "launch",
